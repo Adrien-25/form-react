@@ -8,7 +8,7 @@ import SimLogin from './pages/SimLogin';
 import './App.css';
 import propTypes from 'prop-types';
 import Roles from './pages/Roles'
-import Register from './pages/Register';
+import Register from './pages/Register2';
 
 
 function App() {
