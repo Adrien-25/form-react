@@ -13,10 +13,10 @@ function UserProfile(props) {
         <img src={fond} className="card-img-top" alt="..."/>
         <div className="card-body">
             <h5 className="card-title">{props.user.name}</h5>
-            <p className="card-text">Nam sodales pulvinar malesuada. 
-            </p>
+            <p className="card-text mb-0">{props.user.username}</p>
+            <p className="card-text">{props.user.email}</p>
             <div className="d-flex justify-content-end">
-              <button className="btn btn-primary" onClick={handleClick}>
+              <button className="btn btn-danger" onClick={handleClick}>
                 <i className=' bi bi-trash3'></i>
               </button>
             </div>
