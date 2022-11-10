@@ -1,15 +1,19 @@
-import React, { useCallback } from 'react';
+import React, { useCallback,useContext } from 'react';
 import propTypes from 'prop-types';
 import fond from '../logo.svg';
 import axios from 'axios';
+import { Context } from '../context';
+import classnames from 'classnames';
 
 function UserProfile(props) {
   const handleClick = useCallback(() => {
     axios.delete('https://jsonplaceholder.typicode.com/users/'+props.user.id);
     props.deleteUser(props.user.id)
   },[props])
+  const { context } = useContext(Context)
+
   return (
-    <div className='card'>
+    <div className={classnames('card bg-' + context.theme, { 'text-light': context.theme === 'dark' })}>
         <img src={fond} className="card-img-top" alt="..."/>
         <div className="card-body">
             <h5 className="card-title">{props.user.name}</h5>

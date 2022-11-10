@@ -1,13 +1,18 @@
-import React, { useState} from 'react';
+import React, { useContext,useCallback} from 'react';
 import logo from '../logo.svg';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+import { Context } from '../context';
+import classnames from 'classnames'
 
 
 function Header(props) {
     // const [user, setUser ] = useState('');
-    
+    const { context, dispatch } = useContext(Context)
+    const switchTheme = useCallback(() => {
+      dispatch({ type: 'switchTheme' })
+    }, [dispatch])
+
     const login = props.user
     ? <span>Bienvenue {props.user} !</span>
     : <div className=''> 
@@ -17,7 +22,9 @@ function Header(props) {
     
     return (
         <div>
-            <nav className="navbar navbar-dark bg-dark">
+            <nav className={classnames('navbar navbar-expand-md',
+                context.theme === 'light' ? 'navbar-dark bg-dark' : 'navbar-light bg-secondary',
+                )}>                
                 <div className="container-fluid">
                     <div className="navbar-brand mr-5" href="#">
                         <img src={logo} alt="" width="30" height="24" className="d-inline-block align-text-top mt-1"/>
@@ -33,7 +40,20 @@ function Header(props) {
                             <Link to="/roles" className="nav-link">Rôles</Link>
                         </li>
                     </ul>
-                    <div className='navbar-text'>{login}</div>
+                    <div className='navbar-text'>
+                        <div className='navbar-text'>
+                            <div className="form-check form-switch">
+                                <input
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    role="switch"
+                                    onChange={switchTheme}
+                                    />
+                                    {context.theme}
+                            </div>
+                        </div>
+                        {login}
+                    </div>
                 </div>
             </nav>
         </div>
